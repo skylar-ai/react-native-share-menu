@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        rnsmDefaultTargetSdkVersion = 31
-        rnsmDefaultCompileSdkVersion = 31
+        rnsmDefaultTargetSdkVersion = 33
+        rnsmDefaultCompileSdkVersion = 33
         rnsmDefaultMinSdkVersion = 21
     }
     ext.safeExtGet = {prop, fallback ->
