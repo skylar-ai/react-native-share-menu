@@ -157,6 +157,19 @@ public class ShareMenuReactView: NSObject {
                             semaphore.signal()
                         }
                         semaphore.wait()
+                    } else if provider.hasItemConformingToTypeIdentifier(kUTTypeMovie as String) {
+                        provider.loadItem(forTypeIdentifier: kUTTypeMovie as String, options: nil) { (item, error) in
+                            let movieUrl: URL! = item as? URL
+
+                            if (movieUrl != nil) {
+                                if let movieData = try? Data(contentsOf: movieUrl) {
+                                    results.append([DATA_KEY: movieUrl.absoluteString, MIME_TYPE_KEY: self.extractMimeType(from: movieUrl)])
+                                }
+                            }
+
+                            semaphore.signal()
+                        }
+                        semaphore.wait()                    
                     } else if provider.hasItemConformingToTypeIdentifier(kUTTypeData as String) {
                         provider.loadItem(forTypeIdentifier: kUTTypeData as String, options: nil) { (item, error) in
                             let url: URL! = item as? URL
